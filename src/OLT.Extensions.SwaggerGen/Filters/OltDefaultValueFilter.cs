@@ -57,7 +57,7 @@ namespace OLT.Extensions.SwaggerGen
                     }
                 }
 
-                parameter.Required = parameter.Required | description.IsRequired;
+                parameter.Required = parameter.Required || description.IsRequired;
 
                 if (routeInfo == null)
                 {

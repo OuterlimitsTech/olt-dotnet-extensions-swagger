@@ -17,7 +17,6 @@ namespace OLT.Extensions.SwaggerGen
         {
             _provider = provider;
             _options = options;
-            //_options = options.Value;
         }
 
         public void Configure(SwaggerGenOptions options)
@@ -36,13 +35,12 @@ namespace OLT.Extensions.SwaggerGen
 
         private OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
         {
-            var info = new OpenApiInfo()
+            return new OpenApiInfo()
             {
                 Title = _options.Title,
                 Version = description.ApiVersion.ToString(),
                 Description = description.IsDeprecated ? $"{_options.Description} - DEPRECATED" : _options.Description,
             };
-            return info;
         }
     }
 

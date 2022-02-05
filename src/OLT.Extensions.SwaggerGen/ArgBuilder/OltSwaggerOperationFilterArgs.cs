@@ -14,8 +14,7 @@ namespace OLT.Extensions.SwaggerGen
 
         public T WithOperationFilter(OltDefaultValueFilter filter)
         {
-            OperationFilters.Add(filter);
-            return (T)this;
+            return this.WithOperationFilter<OltDefaultValueFilter>(filter);
         }
 
 

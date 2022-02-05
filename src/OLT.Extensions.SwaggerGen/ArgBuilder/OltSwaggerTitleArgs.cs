@@ -6,8 +6,7 @@ namespace OLT.Extensions.SwaggerGen
         where T : OltSwaggerTitleArgs<T>
     {
 
-        internal string Title { get; set; } = 
-            Assembly.GetEntryAssembly()?.GetCustomAttribute<System.Reflection.AssemblyProductAttribute>()?.Product ??
+        internal string Title { get; set; } =             
             Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyProductAttribute>()?.Product ??
             "Web Api";
 

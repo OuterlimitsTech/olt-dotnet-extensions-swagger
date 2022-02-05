@@ -35,7 +35,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
                 swagger.Should().NotBeNull();
                 swagger.SecurityRequirements.Any().Should().BeTrue();
-                //swagger.Paths.Any().Should().BeTrue();
+                swagger.Paths.Any().Should().BeTrue();
                 swagger.Components.Schemas.Should().NotBeNull();
                 Assert.Equal(TestStartup.Title, swagger.Info.Title);
                 Assert.Equal(TestStartup.Description, swagger.Info.Description);
@@ -51,59 +51,16 @@ namespace OLT.Extensions.SwaggerGen.Tests
                     var jsonString = root.ToString();
                     Assert.Contains(TestStartup.Title, jsonString);
                     Assert.Contains(TestStartup.Description, jsonString);
+                    Assert.Contains("X-API-KEY", jsonString);
+                    Assert.Contains("JWT", jsonString);
+                    Assert.Contains("Bearer", jsonString);
+                    Assert.Contains("api-version", jsonString);
+                    Assert.Contains("The requested API version", jsonString);
                 }
 
             }
 
         }
 
-        //[Fact]
-        //public void Options()
-        //{
-        //    var services = new ServiceCollection();
-
-        //    var args = new OltSwaggerArgs()
-        //            .WithSecurityScheme(new OltSwaggerJwtBearerToken())
-        //            .WithSecurityScheme(new OltSwaggerApiKey())
-        //            .WithOperationFilter(new OltDefaultValueFilter())
-        //            .Enable(true);
-
-        //    //var options = new OltOptionsAspNetSwagger();
-
-        //    var title = Assembly.GetEntryAssembly()?.GetCustomAttribute<System.Reflection.AssemblyProductAttribute>()?.Product ??
-        //                Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyProductAttribute>()?.Product;
-
-        //    var description = Assembly.GetEntryAssembly()?.GetCustomAttribute<System.Reflection.AssemblyDescriptionAttribute>()?.Description ??
-        //                      Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyDescriptionAttribute>()?.Description;
-
-        //    services.AddSwaggerVersioning(args);
-
-        //    //Assert.False(options.);
-        //    //Assert.Equal(title, options.Title);
-        //    //Assert.Equal(description, options.Description);
-        //    //Assert.NotNull(options.XmlSettings);
-        //    //Assert.False(options.XmlSettings.IncludeControllerXmlComments);
-        //    //Assert.Null(options.XmlSettings.CommentsFilePath);
-
-        //    //title = Faker.Lorem.GetFirstWord();
-        //    //description = Faker.Lorem.Sentence();
-
-        //    //options = new OltOptionsAspNetSwagger
-        //    //{
-        //    //    Enabled = true,
-        //    //    Title = title,
-        //    //    Description = description,
-        //    //    XmlSettings = new OltOptionsAspNetSwaggerXml
-        //    //    {
-        //    //        IncludeControllerXmlComments = true,
-        //    //        CommentsFilePath = AppContext.BaseDirectory
-        //    //    }
-        //    //};
-
-        //    //Assert.Equal(title, options.Title);
-        //    //Assert.Equal(description, options.Description);
-        //    //Assert.True(options.XmlSettings.IncludeControllerXmlComments);
-        //    //Assert.Equal(AppContext.BaseDirectory, options.XmlSettings.CommentsFilePath);
-        //}
     }
 }
