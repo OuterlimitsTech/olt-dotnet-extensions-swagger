@@ -13,16 +13,22 @@ namespace OLT.Extensions.SwaggerGen
 {
     public static class OltSwaggerExtensions
     {
-        public static IServiceCollection AddSwaggerVersioning(this IServiceCollection services, OltSwaggerArgs args)
+        public static IServiceCollection AddSwaggerWithVersioning(this IServiceCollection services, OltSwaggerArgs args)
         {
             services.AddSwaggerGen(opt =>
             {
                 args.OperationFilters.ToList().ForEach(item => item.Apply(opt));
                 args.SecuritySchemes.ToList().ForEach(item => item.Apply(opt));
 
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                opt.IncludeXmlComments(xmlPath);
+                if (args.IncludeXmlComments)
+                {
+                    var xmlPath = args.XmlFile ?? Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");                    
+                    var fileExists = File.Exists(xmlPath);
+                    if (args.XmlFileMissingException || fileExists)
+                    {
+                        opt.IncludeXmlComments(xmlPath);
+                    }                    
+                }
 
             });
             services.AddSingleton(args);
@@ -43,7 +49,6 @@ namespace OLT.Extensions.SwaggerGen
             {
                 foreach (var description in provider.ApiVersionDescriptions)
                 {
-                    //options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                     var deprecated = description.IsDeprecated ? " [DEPRECATED]" : string.Empty;
                     opt.SwaggerEndpoint($"{description.GroupName}/swagger.json", $"{options.Title} API {description.GroupName}{deprecated}");
 

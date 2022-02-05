@@ -5,13 +5,9 @@
 		<TargetFramework>net5.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<RootNamespace>OLT.Extensions.SwaggerGen</RootNamespace>
-		<Description>Basic Scaffolding for Swagger UI</Description>
+		<Description>Builder for Swagger with Api Versioning</Description>
 		<ProjectGuid>03ba13fe-4fdc-4e27-b64f-dcf1be3a7fe2</ProjectGuid>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <None Include="..\..\.editorconfig" Link=".editorconfig" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
@@ -44,6 +40,7 @@
 
 	<PropertyGroup>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
 	
 </Project>

@@ -7,11 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OLT.Extensions.SwaggerGen",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OLT.Extensions.SwaggerGen.Tests", "tests\OLT.Extensions.SwaggerGen.Tests\OLT.Extensions.SwaggerGen.Tests.csproj", "{45C43A8B-FEB2-4AA9-9AF0-AF8936BE7663}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D3C30632-6B22-4702-B7F6-E6F3466716D5}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4457799F-3AF6-407B-B1DF-8CB6C1095AA9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E20F2D2C-A1E2-4655-BE71-9C858B2078AC}"

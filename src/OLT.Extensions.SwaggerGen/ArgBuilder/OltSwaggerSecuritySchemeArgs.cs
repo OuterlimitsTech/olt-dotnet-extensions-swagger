@@ -18,8 +18,7 @@ namespace OLT.Extensions.SwaggerGen
         /// <returns><typeparamref name="T"/></returns>
         public T WithSecurityScheme(OltSwaggerJwtBearerToken scheme)
         {
-            SecuritySchemes.Add(scheme);
-            return (T)this;
+            return this.WithSecurityScheme<OltSwaggerJwtBearerToken>(scheme);
         }
 
         /// <summary>
@@ -29,8 +28,7 @@ namespace OLT.Extensions.SwaggerGen
         /// <returns><typeparamref name="T"/></returns>
         public T WithSecurityScheme(OltSwaggerApiKey scheme)
         {
-            SecuritySchemes.Add(scheme);
-            return (T)this;
+            return this.WithSecurityScheme<OltSwaggerApiKey>(scheme);
         }
 
         /// <summary>
