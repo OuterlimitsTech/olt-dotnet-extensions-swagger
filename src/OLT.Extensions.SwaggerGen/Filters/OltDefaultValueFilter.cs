@@ -8,11 +8,11 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace OLT.Extensions.SwaggerGen
 {
 
-    /// <summary>  
-    /// Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter.  
-    /// </summary>  
-    /// <remarks>This <see cref="SwaggerGenerator"/> is only required due to bugs in the <see cref="IOperationFilter"/>.  
-    /// Once they are fixed and published, this class can be removed.</remarks>  
+    /// <summary>
+    /// Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter.
+    /// </summary>
+    /// <remarks>This <see cref="IOperationFilter"/> is only required due to bugs in the <see cref="SwaggerGenerator"/>.
+    /// Once they are fixed and published, this class can be removed.</remarks> 
     public class OltDefaultValueFilter : IOltOperationFilter
     {
         public void Apply(SwaggerGenOptions opt)
@@ -21,10 +21,10 @@ namespace OLT.Extensions.SwaggerGen
         }
 
         /// <summary>
-        /// Applied by Swagger
+        /// Applies the filter to the specified operation using the given context.
         /// </summary>
-        /// <param name="operation"></param>
-        /// <param name="context"></param>
+        /// <param name="operation">The operation to apply the filter to.</param>
+        /// <param name="context">The current operation filter context.</param>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var apiDescription = context.ApiDescription;
@@ -46,7 +46,17 @@ namespace OLT.Extensions.SwaggerGen
                     parameter.Name = description.ModelMetadata?.Name;
                 }
 
+                if (parameter.Description != null)
+                {
+                    var x = 1;
+                }   
+                if (description.ModelMetadata?.Description != null && !description.ModelMetadata.Description.Equals("The requested API version"))
+                {
+                    var y = 1;
+                }
+
                 parameter.Description ??= description.ModelMetadata?.Description;
+
 
                 if (parameter.Name != null && parameter.Name.Equals("api-version") && (parameter.In == ParameterLocation.Query || parameter.In == ParameterLocation.Header))
                 {
@@ -64,8 +74,8 @@ namespace OLT.Extensions.SwaggerGen
                     continue;
                 }
 
-
                 parameter.Required |= !routeInfo.IsOptional;
+
             }
 
         }

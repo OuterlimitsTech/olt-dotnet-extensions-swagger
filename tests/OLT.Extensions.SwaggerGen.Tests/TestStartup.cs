@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace OLT.Extensions.SwaggerGen.Tests
 {
+
     public class TestStartup
     {
         public TestStartup(IConfiguration configuration)
@@ -13,22 +15,28 @@ namespace OLT.Extensions.SwaggerGen.Tests
             Configuration = configuration;
         }
 
-        public const string Title = "Title 1";
-        public const string Description = "Description goes here";
+        public static string? Title { get; set; }
+        public static string? Description { get; set; }
+        public static OpenApiContact? Contact { get; set; }
+        public static OpenApiLicense? License { get; set; }
+        public static OltSwaggerArgs Args { get; set; }
 
         protected IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var args = new OltSwaggerArgs()
-                .WithTitle(Title)
-                .WithDescription(Description)
-                .WithSecurityScheme(new OltSwaggerJwtBearerToken())
-                .WithSecurityScheme(new OltSwaggerApiKey())
-                .WithOperationFilter(new OltDefaultValueFilter())
-                .Enable(true);
+            //var args = new OltSwaggerArgs()
+            //    .WithTitle(TestStartup.Title)
+            //    .WithDescription(TestStartup.Description)
+            //    .WithSecurityScheme(new OltSwaggerJwtBearerToken())
+            //    .WithSecurityScheme(new OltSwaggerApiKey())
+            //    .WithOperationFilter(new OltDefaultValueFilter())
+            //    .WithApiContact(TestStartup.Contact)
+            //    .WithApiLicense(TestStartup.License)
+            //    .WithXmlComments()
+            //    .Enable(true);
 
-            services.AddSwaggerVersioning(args);
+            services.AddSwaggerWithVersioning(Args);
             services.AddMvcCore();
 
             services.AddApiVersioning(opt =>

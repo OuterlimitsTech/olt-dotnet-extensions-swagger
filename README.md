@@ -7,14 +7,17 @@
 public void ConfigureServices(IServiceCollection services)
 {
    ...
-   services.AddSwaggerVersioning(
+   services.AddSwaggerWithVersioning(
       new OltSwaggerArgs()
-            .WithTitle(AppSettings.Swagger.Title)
-            .WithDescription(AppSettings.Swagger.Description)
+            .WithTitle(Title)
+            .WithDescription(Description)
             .WithSecurityScheme(new OltSwaggerJwtBearerToken())
             .WithSecurityScheme(new OltSwaggerApiKey())
             .WithOperationFilter(new OltDefaultValueFilter())
-            .Enable(true))
+            .WithApiContact(new OpenApiContact { Name = Faker.Name.FullName(), Url = new System.Uri(Faker.Internet.Url()), Email = Faker.Internet.Email() })
+            .WithApiLicense(new OpenApiLicense { Name = Faker.Lorem.GetFirstWord(), Url = new System.Uri(Faker.Internet.Url()) })
+            .WithXmlComments()
+            .Enable(true);
 
    ...
 }

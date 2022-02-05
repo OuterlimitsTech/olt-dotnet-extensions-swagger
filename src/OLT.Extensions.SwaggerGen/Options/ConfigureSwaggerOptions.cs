@@ -9,14 +9,14 @@ namespace OLT.Extensions.SwaggerGen
     public class ConfigureSwaggerOptions : IConfigureNamedOptions<SwaggerGenOptions>
     {
         private readonly IApiVersionDescriptionProvider _provider;
-        private readonly OltSwaggerArgs _options;
+        private readonly OltSwaggerArgs _args;
 
         public ConfigureSwaggerOptions(
-            OltSwaggerArgs options,
+            OltSwaggerArgs args,
             IApiVersionDescriptionProvider provider)
         {
             _provider = provider;
-            _options = options;
+            _args = args;
         }
 
         public void Configure(SwaggerGenOptions options)
@@ -24,7 +24,7 @@ namespace OLT.Extensions.SwaggerGen
             // add swagger document for every API version discovered
             foreach (var description in _provider.ApiVersionDescriptions)
             {
-                options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
+                options.SwaggerDoc(description.GroupName, CreateApiInfo(description));
             }
         }
 
@@ -33,14 +33,26 @@ namespace OLT.Extensions.SwaggerGen
             Configure(options);
         }
 
-        private OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
+        private OpenApiInfo CreateApiInfo(ApiVersionDescription description)
         {
-            return new OpenApiInfo()
+            var openApiInfo = new OpenApiInfo
             {
-                Title = _options.Title,
+                Title = _args.Title,
                 Version = description.ApiVersion.ToString(),
-                Description = description.IsDeprecated ? $"{_options.Description} - DEPRECATED" : _options.Description,
+                Description = description.IsDeprecated ? $"{_args.Description} - DEPRECATED" : _args.Description,
             };
+
+            if (_args.Contact != null)
+            {
+                openApiInfo.Contact = _args.Contact;
+            }
+
+            if (_args.License != null)
+            {
+                openApiInfo.License = _args.License;
+            }
+
+            return openApiInfo;
         }
     }
 
