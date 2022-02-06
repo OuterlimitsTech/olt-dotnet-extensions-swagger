@@ -1,22 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 
-namespace OLT.Extensions.SwaggerGen.Tests
+namespace OLT.Extensions.SwaggerGen.Tests.Controllers.V1
 {
-    public class TestModel
-    {
-        /// <summary>
-        /// Id Value
-        /// </summary>
-        public int Id { get; set; }
-
-        
-        public int? Value { get; set; }
-    }
-
-    [Route("api/log")]
+    [ApiVersion("1.0", Deprecated = true)]
+    [Route("api/test")]
     [ApiController]
-    public class TestController : ControllerBase
+    public class TestDeprecatedController : ControllerBase
     {
 
         /// <summary>
@@ -26,7 +16,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
         /// <returns></returns>
         [HttpPost, Route("")]
         public ActionResult<string> Log(string value)
-        {            
+        {
             return Ok($"Received {value}");
         }
 
@@ -55,9 +45,10 @@ namespace OLT.Extensions.SwaggerGen.Tests
         ///       "emailId": "Mike.Andrew@gmail.com"        
         ///     }
         /// </remarks>
+        /// <param name="value1"></param>   
         /// <param name="model"></param>   
         [HttpGet, Route("another/{value1:int}/test")]
-        public ActionResult<string> PostTest(int value1, [FromBody]TestModel model)
+        public ActionResult<string> PostTest(int value1, [FromBody] TestModel model)
         {
             return Ok($"Pong {value1} {model.Id} {model.Value}");
         }
