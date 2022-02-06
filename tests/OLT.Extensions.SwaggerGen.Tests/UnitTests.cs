@@ -20,7 +20,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
     public class UnitTests
     {
 
-        private string Deprecated = $" - {OltSwaggerExtensions.Deprecated}";
+        private readonly string Deprecated = $" - {OltSwaggerExtensions.Deprecated}";
 
         [Fact]
         public async Task SwaggerTests()

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
 		<SonarQubeExclude>true</SonarQubeExclude>
@@ -10,8 +10,8 @@
 	<ItemGroup>
 		<PackageReference Include="Faker.Net" Version="2.0.154" />
 		<PackageReference Include="FluentAssertions" Version="6.4.0" />
-		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.13" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="xunit" Version="2.4.1" />

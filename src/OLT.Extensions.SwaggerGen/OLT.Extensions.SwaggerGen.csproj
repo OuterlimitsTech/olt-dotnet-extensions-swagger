@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<!--<TargetFrameworks>net5.0;net6.0</TargetFrameworks>-->
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<RootNamespace>OLT.Extensions.SwaggerGen</RootNamespace>
 		<Description>Builder for Swagger with Api Versioning</Description>
