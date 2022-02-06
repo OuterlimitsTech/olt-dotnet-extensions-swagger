@@ -6,7 +6,6 @@ namespace OLT.Extensions.SwaggerGen
        where T : OltSwaggerDescriptionArgs<T>
     {
         internal string Description { get; set; } =
-            Assembly.GetEntryAssembly()?.GetCustomAttribute<System.Reflection.AssemblyDescriptionAttribute>()?.Description ??
             Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyDescriptionAttribute>()?.Description ??
             "Api Methods";
 
