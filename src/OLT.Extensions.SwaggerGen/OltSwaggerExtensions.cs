@@ -13,8 +13,17 @@ namespace OLT.Extensions.SwaggerGen
 {
     public static class OltSwaggerExtensions
     {
+        public const string Deprecated = "DEPRECATED";
+
         public static IServiceCollection AddSwaggerWithVersioning(this IServiceCollection services, OltSwaggerArgs args)
         {
+            services.AddSingleton(args);
+
+            if (!args.IsEnabled)
+            {
+                return services;
+            }
+
             services.AddSwaggerGen(opt =>
             {
                 args.OperationFilters.ToList().ForEach(item => item.Apply(opt));
@@ -30,8 +39,7 @@ namespace OLT.Extensions.SwaggerGen
                     }                    
                 }
 
-            });
-            services.AddSingleton(args);
+            });            
             services.ConfigureOptions<ConfigureSwaggerOptions>();
 
             return services;
@@ -40,8 +48,15 @@ namespace OLT.Extensions.SwaggerGen
         public static IApplicationBuilder UseSwaggerWithVersioning(this IApplicationBuilder app)
         {
             IServiceProvider services = app.ApplicationServices;
+            var args = services.GetRequiredService<OltSwaggerArgs>();
+
+            if (!args.IsEnabled)
+            {
+                return app;
+            }
+
             var provider = services.GetRequiredService<IApiVersionDescriptionProvider>();
-            var options = services.GetRequiredService<OltSwaggerArgs>();
+            
 
             app.UseSwagger();
 
@@ -49,8 +64,8 @@ namespace OLT.Extensions.SwaggerGen
             {
                 foreach (var description in provider.ApiVersionDescriptions)
                 {
-                    var deprecated = description.IsDeprecated ? " [DEPRECATED]" : string.Empty;
-                    opt.SwaggerEndpoint($"{description.GroupName}/swagger.json", $"{options.Title} API {description.GroupName}{deprecated}");
+                    var deprecated = description.IsDeprecated ? $" [{Deprecated}]" : string.Empty;
+                    opt.SwaggerEndpoint($"{description.GroupName}/swagger.json", $"{args.Title} API {description.GroupName}{deprecated}");
 
                 }
             });

@@ -39,7 +39,7 @@ namespace OLT.Extensions.SwaggerGen
             {
                 Title = _args.Title,
                 Version = description.ApiVersion.ToString(),
-                Description = description.IsDeprecated ? $"{_args.Description} - DEPRECATED" : _args.Description,
+                Description = description.IsDeprecated ? $"{_args.Description} - {OltSwaggerExtensions.Deprecated}" : _args.Description,
             };
 
             if (_args.Contact != null)

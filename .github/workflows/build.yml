@@ -15,6 +15,8 @@ on:
 
 env:
   SOURCE_DIRECTORY: ${{ github.workspace }}
+  SOLUTION_FILE: "OLT.Extensions.Swagger.sln"
+  BUILD_FILE: "${{SOURCE_DIRECTORY}}/${{SOLUTION_FILE}}"
 
 jobs:
   build:
@@ -44,8 +46,6 @@ jobs:
         id: branch-name
         uses: tj-actions/branch-names@v5.1
 
-      # dotnet sonarscanner begin /o:"outerlimitstech" /k:"OuterlimitsTech_olt-dotnet-extensions-configuration-flagsmith" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /s:${{ github.workspace }}/SonarQube.Analysis.xml
-
       # https://www.seeleycoder.com/blog/sonarqube-with-github-actions-and-net-core-5-x/
       # this process reads the .config -> dotnet-tools.json to restore packages
       - name: Sonarqube Begin
@@ -54,10 +54,10 @@ jobs:
           dotnet tool run dotnet-sonarscanner begin /k:"OuterlimitsTech_olt-dotnet-extensions-swagger" /o:"outerlimitstech" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vstest.reportsPaths=TestResults/*.trx /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.branch.name=${{ steps.branch-name.outputs.current_branch }}
 
       - name: Build
-        run: dotnet build ${{ env.SOURCE_DIRECTORY }} --configuration "Release" --no-restore
+        run: dotnet build ${{ env.BUILD_FILE }} --configuration "Release" --no-restore
 
       - name: Test
-        run: dotnet test ${{ env.SOURCE_DIRECTORY }} --no-build --verbosity normal --no-restore --configuration "Release" --collect:"XPlat Code Coverage" --results-directory TestResults/ --logger "trx;LogFileName=unittests.trx" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+        run: dotnet test ${{ env.BUILD_FILE }} --no-build --verbosity normal --no-restore --configuration "Release" --collect:"XPlat Code Coverage" --results-directory TestResults/ --logger "trx;LogFileName=unittests.trx" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
         # --collect:"XPlat Code Coverage" --results-directory TestResults/ --logger "trx;LogFileName=unittests.trx" --no-build --no-restore --configuration release -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
         env:
           ASPNETCORE_ENVIRONMENT: Test

@@ -20,7 +20,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
     public class UnitTests
     {
 
-        const string Deprecated = " - DEPRECATED";
+        private string Deprecated = $" - {OltSwaggerExtensions.Deprecated}";
 
         [Fact]
         public async Task SwaggerTests()
@@ -29,22 +29,26 @@ namespace OLT.Extensions.SwaggerGen.Tests
             const string version2 = "v2"; //Partially Deprecated
             const string version3 = "v3"; //Nothing Deprecated
 
+
+
             //Due to reusing TestStartup, I call each test in sequence             
             await Test1(version1, true);
             await Test2(version1, true);
             await Test3(version1, true);
             await Test4(version1, true);
+            await Disabled(version1);
 
             await Test1(version2, false);
             await Test2(version2, false);
             await Test3(version2, false);
             await Test4(version2, false);
+            await Disabled(version2);
 
             await Test1(version3, false);
             await Test2(version3, false);
             await Test3(version3, false);
             await Test4(version3, false);
-
+            await Disabled(version3);
         }
 
 
@@ -196,6 +200,29 @@ namespace OLT.Extensions.SwaggerGen.Tests
             }
 
 
+        }
+
+        public async Task Disabled(string version)
+        {
+            TestStartup.Title = Faker.Company.Name();
+            TestStartup.Description = Faker.Lorem.Sentence();
+            TestStartup.Contact = null;
+            TestStartup.License = null;
+
+
+            TestStartup.Args = new OltSwaggerArgs()
+                .WithTitle(TestStartup.Title)
+                .WithDescription(TestStartup.Description)
+                .WithOperationFilter(new OltDefaultValueFilter())
+                .Enable(false);
+
+            var builder = TestExtensions.WebHostBuilder<TestStartup>();
+
+            using (var testServer = new TestServer(builder))
+            {
+                var response = await testServer.CreateRequest($"/swagger/{version}/swagger.json").SendAsync("GET");
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            }
         }
 
         private static async Task<string> GetSwaggerJson(TestServer testServer, string version)
