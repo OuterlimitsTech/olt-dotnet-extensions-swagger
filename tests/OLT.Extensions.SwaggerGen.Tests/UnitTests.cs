@@ -50,7 +50,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
         public async Task Test1(string version, bool completelyDeprecated)
         {
-                
+            
             TestStartup.Title = Faker.Company.Name();
             TestStartup.Description = Faker.Lorem.Sentence();
             TestStartup.Contact = new OpenApiContact { Name = Faker.Name.FullName(), Url = new System.Uri(Faker.Internet.Url()), Email = Faker.Internet.Email() };
