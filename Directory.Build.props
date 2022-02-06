@@ -3,10 +3,10 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Company>OuterLimits Technologies, Inc</Company>
-    <Product>Flagsmith Configuration Extensions</Product>
+    <Product>Swagger extensions and builders</Product>
     <Authors>Chris Straw</Authors>
-    <Copyright>Copyright © 2003-2021, OuterLimits Technologies, Inc Plainfield, IN</Copyright>
-    <RepositoryUrl>https://github.com/OuterlimitsTech/olt-dotnet-extensions-configuration-flagsmith</RepositoryUrl>
+    <Copyright>Copyright © 2003-2022, OuterLimits Technologies, Inc Plainfield, IN</Copyright>
+    <RepositoryUrl>https://github.com/OuterlimitsTech/olt-dotnet-extensions-swagger</RepositoryUrl>
     <PackageIcon>icon.png</PackageIcon>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DebugType>embedded</DebugType>
