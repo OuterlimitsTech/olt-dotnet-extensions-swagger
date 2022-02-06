@@ -2,9 +2,9 @@
 
 namespace OLT.Extensions.SwaggerGen.Tests
 {
-    public class GeneralTestExpect
+    public class GeneralTestParams
     {
-        public GeneralTestExpect(string? title, string? description, bool hasSecurityReq, bool hasPaths)
+        public GeneralTestParams(string? title, string? description, bool hasSecurityReq, bool hasPaths)
         {
             Title = title;
             Description = description;
