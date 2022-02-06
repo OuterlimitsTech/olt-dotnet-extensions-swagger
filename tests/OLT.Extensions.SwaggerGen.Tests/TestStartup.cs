@@ -19,7 +19,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
         public static string? Description { get; set; }
         public static OpenApiContact? Contact { get; set; }
         public static OpenApiLicense? License { get; set; }
-        public static OltSwaggerArgs Args { get; set; }
+        public static OltSwaggerArgs? Args { get; set; }
 
         protected IConfiguration Configuration { get; }
 
@@ -36,7 +36,11 @@ namespace OLT.Extensions.SwaggerGen.Tests
             //    .WithXmlComments()
             //    .Enable(true);
 
-            services.AddSwaggerWithVersioning(Args);
+            if (Args != null)
+            {
+                services.AddSwaggerWithVersioning(Args);
+            }
+            
             services.AddMvcCore();
 
             services.AddApiVersioning(opt =>

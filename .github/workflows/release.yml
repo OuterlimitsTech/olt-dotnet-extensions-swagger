@@ -40,9 +40,6 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release -p:Version=${{ steps.version.outputs.version-without-v }} --no-restore
 
-      #     - name: Test
-      #       run: dotnet test --no-build --verbosity normal
-
       - name: "Pack project"
         run: dotnet pack --no-restore --no-build --configuration Release -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
