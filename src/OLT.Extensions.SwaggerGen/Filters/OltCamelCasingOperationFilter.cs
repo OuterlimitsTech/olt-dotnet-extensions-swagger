@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace OLT.Extensions.SwaggerGen
 {
     /// <summary>
-    /// Represents the Swagger/Swashbuckle operation filter used to camel case api route parameter. <seealso cref="https://github.com/OuterlimitsTech/olt-dotnet-extensions-swagger/issues/11"/>
+    /// Represents the Swagger/Swashbuckle operation filter used to camel case api route parameter. <see href="https://github.com/OuterlimitsTech/olt-dotnet-extensions-swagger/issues/11"/>
     /// </summary>
     public class OltCamelCasingOperationFilter : IOltOperationFilter
     {
