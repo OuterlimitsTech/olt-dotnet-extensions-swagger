@@ -58,6 +58,19 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
         }
 
+        [Theory]
+        [InlineData("testValue", "TestValue")]
+        [InlineData("anotherValue", "anotherValue")]
+        [InlineData("A", "A")]
+        [InlineData("aB", "AB")]
+        [InlineData("cd", "cd")]
+        [InlineData("anotherTESTValue", "AnotherTESTValue")]
+        [InlineData("", "")]
+        [InlineData(null, null)]
+        public void ToCamelCaseTests(string expected, string value)
+        {
+            Assert.Equal(expected, OltCamelCasingOperationFilter.ToCamelCase(value));
+        }
 
         public async Task Test1(string version, bool completelyDeprecated)
         {
