@@ -37,18 +37,25 @@ namespace OLT.Extensions.SwaggerGen.Tests
             await Test3(version1, true);
             await Test4(version1, true);
             await Disabled(version1);
+            await CamelCaseEnabled(version1);
+            await CamelCaseDisabled(version1);
 
             await Test1(version2, false);
             await Test2(version2, false);
             await Test3(version2, false);
             await Test4(version2, false);
             await Disabled(version2);
+            await CamelCaseEnabled(version2);
+            await CamelCaseDisabled(version2);
 
             await Test1(version3, false);
             await Test2(version3, false);
             await Test3(version3, false);
             await Test4(version3, false);
             await Disabled(version3);
+            await CamelCaseEnabled(version3);
+            await CamelCaseDisabled(version3);
+
         }
 
 
@@ -73,7 +80,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
                 .WithDescription(TestStartup.Description)
                 .WithSecurityScheme(new OltSwaggerJwtBearerToken())
                 .WithSecurityScheme(new OltSwaggerApiKey())
-                .WithOperationFilter(new OltDefaultValueFilter())
+                .WithOperationFilter(new OltDefaultValueFilter())                
                 .WithApiContact(TestStartup.Contact)
                 .WithApiLicense(TestStartup.License)
                 .WithXmlComments()
@@ -223,6 +230,45 @@ namespace OLT.Extensions.SwaggerGen.Tests
                 var response = await testServer.CreateRequest($"/swagger/{version}/swagger.json").SendAsync("GET");
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             }
+        }
+
+        public async Task CamelCaseEnabled(string version)
+        {
+            TestStartup.Args = new OltSwaggerArgs()
+                .WithTitle(Faker.Company.Name())
+                .WithDescription(Faker.Lorem.Sentence())
+                .WithOperationFilter(new OltDefaultValueFilter())
+                .WithOperationFilter(new OltCamelCasingOperationFilter())
+                .Enable(true);
+
+            var builder = TestExtensions.WebHostBuilder<TestStartup>();
+
+            using (var testServer = new TestServer(builder))
+            {
+                var jsonString = await GetSwaggerJson(testServer, version);
+                Assert.DoesNotContain("\"name\": \"RouteId\"", jsonString);
+                Assert.Contains("\"name\": \"routeId\"", jsonString);
+            }
+
+        }
+
+        public async Task CamelCaseDisabled(string version)
+        {
+            TestStartup.Args = new OltSwaggerArgs()
+                .WithTitle(Faker.Company.Name())
+                .WithDescription(Faker.Lorem.Sentence())
+                .WithOperationFilter(new OltDefaultValueFilter())
+                .Enable(true);
+
+            var builder = TestExtensions.WebHostBuilder<TestStartup>();
+
+            using (var testServer = new TestServer(builder))
+            {
+                var jsonString = await GetSwaggerJson(testServer, version);
+                Assert.Contains("\"name\": \"RouteId\"", jsonString);
+                Assert.DoesNotContain("\"name\": \"routeId\"", jsonString);
+            }
+
         }
 
         private static async Task<string> GetSwaggerJson(TestServer testServer, string version)

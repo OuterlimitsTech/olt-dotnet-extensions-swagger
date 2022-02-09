@@ -53,5 +53,12 @@ namespace OLT.Extensions.SwaggerGen.Tests.Controllers.V2
         {
             return Ok($"Pong {value1} {model.Id} {model.Value}");
         }
+
+
+        [HttpGet, Route("values/{routeId:int}")]
+        public ActionResult<string> GetAllParties([FromRoute] RouteIdParams routeIdParams)
+        {
+            return Ok($"RouteId = {routeIdParams.RouteId}");
+        }
     }
 }
