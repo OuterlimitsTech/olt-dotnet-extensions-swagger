@@ -9,7 +9,7 @@ namespace OLT.Extensions.SwaggerGen
 {
 
     /// <summary>
-    /// Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter.
+    /// Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter and documents deprecated controllers and methods
     /// </summary>
     /// <remarks>This <see cref="IOperationFilter"/> is only required due to bugs in the <see cref="SwaggerGenerator"/>.
     /// Once they are fixed and published, this class can be removed.</remarks> 

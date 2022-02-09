@@ -13,7 +13,7 @@ namespace OLT.Extensions.SwaggerGen
 {
     public static class OltSwaggerExtensions
     {
-        public const string Deprecated = "DEPRECATED";
+        public const string Deprecated = "DEPRECATED";        
 
         public static IServiceCollection AddSwaggerWithVersioning(this IServiceCollection services, OltSwaggerArgs args)
         {
