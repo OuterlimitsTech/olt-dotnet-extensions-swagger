@@ -31,41 +31,39 @@ namespace OLT.Extensions.SwaggerGen
 
             operation.Deprecated = apiDescription.IsDeprecated();
 
-            if (operation.Parameters == null)
+            if (operation.Parameters != null)
             {
-                return;
-            }
-
-            foreach (var parameter in operation.Parameters)
-            {
-                var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
-
-                var routeInfo = description.RouteInfo;
-                if (string.IsNullOrEmpty(parameter.Name))
+                foreach (var parameter in operation.Parameters)
                 {
-                    parameter.Name = description.ModelMetadata?.Name;
-                }
+                    var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
 
-                parameter.Description ??= description.ModelMetadata?.Description;
-
-                if (parameter.Name != null && parameter.Name.Equals("api-version") && (parameter.In == ParameterLocation.Query || parameter.In == ParameterLocation.Header))
-                {
-                    parameter.AllowEmptyValue = false;
-                    if (description.DefaultValue != null)
+                    var routeInfo = description.RouteInfo;
+                    if (string.IsNullOrEmpty(parameter.Name))
                     {
-                        parameter.Example = new OpenApiString(description.DefaultValue.ToString());
+                        parameter.Name = description.ModelMetadata?.Name;
                     }
+
+                    parameter.Description ??= description.ModelMetadata?.Description;
+
+                    if (parameter.Name != null && parameter.Name.Equals("api-version") && (parameter.In == ParameterLocation.Query || parameter.In == ParameterLocation.Header || parameter.In == ParameterLocation.Path))
+                    {
+                        parameter.AllowEmptyValue = false;
+                        if (description.DefaultValue != null)
+                        {
+                            parameter.Example = new OpenApiString(description.DefaultValue.ToString());
+                        }
+                    }
+
+                    parameter.Required = parameter.Required || description.IsRequired;
+
+                    if (routeInfo == null)
+                    {
+                        continue;
+                    }
+
+                    parameter.Required |= !routeInfo.IsOptional;
+
                 }
-
-                parameter.Required = parameter.Required || description.IsRequired;
-
-                if (routeInfo == null)
-                {
-                    continue;
-                }
-
-                parameter.Required |= !routeInfo.IsOptional;
-
             }
 
         }

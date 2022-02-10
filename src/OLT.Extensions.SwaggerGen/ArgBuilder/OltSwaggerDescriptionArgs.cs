@@ -5,9 +5,7 @@ namespace OLT.Extensions.SwaggerGen
     public abstract class OltSwaggerDescriptionArgs<T> : OltSwaggerTitleArgs<T>
        where T : OltSwaggerDescriptionArgs<T>
     {
-        internal string Description { get; set; } =
-            Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyDescriptionAttribute>()?.Description ??
-            "Api Methods";
+        internal string Description { get; set; } = "Api Methods";
 
         protected OltSwaggerDescriptionArgs()
         {
@@ -17,7 +15,7 @@ namespace OLT.Extensions.SwaggerGen
         /// Description of API
         /// </summary>
         /// <remarks>
-        /// Defaults to <see cref="AssemblyDescriptionAttribute"/>
+        /// Defaults to "Api Methods"
         /// </remarks>
         /// <param name="value"><see cref="string"/></param>
         /// <returns><typeparamref name="T"/></returns>

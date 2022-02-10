@@ -51,9 +51,7 @@ namespace OLT.Extensions.SwaggerGen
         where T : OltSwaggerTitleArgs<T>
     {
 
-        internal string Title { get; set; } =             
-            Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyProductAttribute>()?.Product ??
-            "Web Api";
+        internal string Title { get; set; } = "API";
 
 
         protected OltSwaggerTitleArgs()
@@ -64,7 +62,7 @@ namespace OLT.Extensions.SwaggerGen
         /// Title of API
         /// </summary>
         /// <remarks>
-        /// Defaults to <see cref="AssemblyProductAttribute"/>
+        /// Defaults to "API"
         /// </remarks>
         /// <param name="value"><see cref="string"/></param>
         /// <returns><typeparamref name="T"/></returns>
