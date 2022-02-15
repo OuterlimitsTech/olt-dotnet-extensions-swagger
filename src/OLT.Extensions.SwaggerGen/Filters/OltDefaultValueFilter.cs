@@ -45,7 +45,7 @@ namespace OLT.Extensions.SwaggerGen
 
                     parameter.Description ??= description.ModelMetadata?.Description;
 
-                    if (parameter.Name != null && parameter.Name.Equals("api-version") && (parameter.In == ParameterLocation.Query || parameter.In == ParameterLocation.Header || parameter.In == ParameterLocation.Path))
+                    if (parameter.Name != null && parameter.Name.Equals("api-version") && parameter.In == ParameterLocation.Query)
                     {
                         parameter.AllowEmptyValue = false;
                         if (description.DefaultValue != null)
