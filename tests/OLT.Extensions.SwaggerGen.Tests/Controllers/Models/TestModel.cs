@@ -1,4 +1,6 @@
-﻿namespace OLT.Extensions.SwaggerGen.Tests
+﻿using System.ComponentModel;
+
+namespace OLT.Extensions.SwaggerGen.Tests
 {
     public class TestModel
     {
@@ -7,7 +9,7 @@
         /// </summary>
         public int Id { get; set; }
 
-        
+        [Description("Value of the item")]
         public int? Value { get; set; }
     }
 }

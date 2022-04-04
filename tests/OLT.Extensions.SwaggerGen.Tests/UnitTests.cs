@@ -96,7 +96,6 @@ namespace OLT.Extensions.SwaggerGen.Tests
                 .WithOperationFilter(new OltDefaultValueFilter())                
                 .WithApiContact(TestStartup.Contact)
                 .WithApiLicense(TestStartup.License)
-                .WithXmlComments()
                 .Enable(true);
 
             var builder = TestExtensions.WebHostBuilder<TestStartup>();
@@ -160,8 +159,8 @@ namespace OLT.Extensions.SwaggerGen.Tests
             TestStartup.Contact = null;
             TestStartup.License = null;
 
-            var product = Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyProductAttribute>()?.Product;
-            var description = Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyDescriptionAttribute>()?.Description;
+            var product = "API";
+            var description = "Api Methods";
 
             var expectedDescription = completelyDeprecated ? $"{description}{Deprecated}" : description;
 
@@ -195,8 +194,8 @@ namespace OLT.Extensions.SwaggerGen.Tests
             TestStartup.Contact = null;
             TestStartup.License = null;
 
-            var product = Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyProductAttribute>()?.Product;
-            var description = Assembly.GetCallingAssembly().GetType().Assembly.GetCustomAttribute<System.Reflection.AssemblyDescriptionAttribute>()?.Description;
+            var product = "API";
+            var description = "Api Methods";
 
             var expectedDescription = completelyDeprecated ? $"{description}{Deprecated}" : description;
 

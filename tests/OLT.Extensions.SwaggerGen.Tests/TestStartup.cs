@@ -45,7 +45,12 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
             services.AddApiVersioning(opt =>
                 {
-                    opt.ApiVersionReader = new QueryStringApiVersionReader("api-version");
+                    opt.ApiVersionReader = ApiVersionReader.Combine(
+                            new UrlSegmentApiVersionReader(),
+                            new QueryStringApiVersionReader("api-version"),
+                            new HeaderApiVersionReader("Accept-Version"),
+                            new MediaTypeApiVersionReader("v"));
+
                     opt.AssumeDefaultVersionWhenUnspecified = true;
                     opt.DefaultApiVersion = new ApiVersion(1, 0);
                     opt.ReportApiVersions = true;
@@ -58,7 +63,8 @@ namespace OLT.Extensions.SwaggerGen.Tests
                         //Tells swagger to replace the version in the controller route  
                         opt.SubstituteApiVersionInUrl = true;
                     });
-                    }
+                
+         }
 
 
         public void Configure(IApplicationBuilder app) //IApplicationBuilder app

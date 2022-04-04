@@ -31,11 +31,10 @@ namespace OLT.Extensions.SwaggerGen
 
                 if (args.IncludeXmlComments)
                 {
-                    var xmlPath = args.XmlFile ?? Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");                    
-                    var fileExists = File.Exists(xmlPath);
+                    var fileExists = File.Exists(args.XmlFile);
                     if (args.XmlFileMissingException || fileExists)
                     {
-                        opt.IncludeXmlComments(xmlPath);
+                        opt.IncludeXmlComments(args.XmlFile);
                     }                    
                 }
 
