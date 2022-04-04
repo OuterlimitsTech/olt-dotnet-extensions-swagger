@@ -16,20 +16,6 @@ namespace OLT.Extensions.SwaggerGen
         /// <summary>
         /// Includes Xml documenation from API.
         /// </summary>
-        /// <remarks>        
-        /// Defaults to name of <seealso cref="Assembly.GetExecutingAssembly"/> (project must create xml documenation file)
-        /// </remarks>
-        /// <returns><typeparamref name="T"/></returns>
-        public T WithXmlComments(bool missingFileException = false)
-        {
-            this.IncludeXmlComments = true;
-            this.XmlFileMissingException = missingFileException;
-            return (T)this;
-        }
-
-        /// <summary>
-        /// Includes Xml documenation from API.
-        /// </summary>
         /// <remarks>
         /// Project create documenation xml file
         /// </remarks>
@@ -39,7 +25,10 @@ namespace OLT.Extensions.SwaggerGen
         public T WithXmlComments(string xmlFile, bool missingFileException = false)
         {            
             this.XmlFile = xmlFile;
-            return this.WithXmlComments(missingFileException);
+            this.IncludeXmlComments = true;
+            this.XmlFileMissingException = missingFileException;
+
+            return (T)this;
         }
     }
 }

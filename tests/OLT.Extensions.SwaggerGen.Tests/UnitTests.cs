@@ -96,7 +96,6 @@ namespace OLT.Extensions.SwaggerGen.Tests
                 .WithOperationFilter(new OltDefaultValueFilter())                
                 .WithApiContact(TestStartup.Contact)
                 .WithApiLicense(TestStartup.License)
-                .WithXmlComments()
                 .Enable(true);
 
             var builder = TestExtensions.WebHostBuilder<TestStartup>();
