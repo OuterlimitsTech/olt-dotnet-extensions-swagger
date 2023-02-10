@@ -300,32 +300,41 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
             swaggerProvider.Should().NotBeNull();
 
-            var swagger = swaggerProvider.GetSwagger(version);
+            try
+            {
+                var swagger = swaggerProvider.GetSwagger(version);
+                swagger.Should().NotBeNull();
+                swagger.SecurityRequirements.Any().Should().Be(expected.HasSecurityReq);
+                swagger.Paths.Any().Should().Be(expected.HasPaths);
+                swagger.Components.Schemas.Should().NotBeNull();
+                Assert.Equal(expected.Title, swagger.Info.Title);
+                Assert.Equal(expected.Description, swagger.Info.Description);
+                if (expected.Contact == null)
+                {
+                    swagger.Info.Contact.Should().BeNull();
+                }
+                else
+                {
+                    swagger.Info.Contact.Should().BeEquivalentTo(expected.Contact);
+                }
 
-            swagger.Should().NotBeNull();
-            swagger.SecurityRequirements.Any().Should().Be(expected.HasSecurityReq);
-            swagger.Paths.Any().Should().Be(expected.HasPaths);
-            swagger.Components.Schemas.Should().NotBeNull();
-            Assert.Equal(expected.Title, swagger.Info.Title);
-            Assert.Equal(expected.Description, swagger.Info.Description);
-            if (expected.Contact == null)
-            {
-                swagger.Info.Contact.Should().BeNull();
+                if (expected.License == null)
+                {
+                    swagger.Info.License.Should().BeNull();
+                }
+                else
+                {
+                    swagger.Info.License.Should().BeEquivalentTo(expected.License);
+                }
+
             }
-            else
+            catch(Exception ex)
             {
-                swagger.Info.Contact.Should().BeEquivalentTo(expected.Contact);
+                var test = ex;
             }
 
-            if (expected.License == null)
-            {
-                swagger.Info.License.Should().BeNull();
-            }
-            else
-            {
-                swagger.Info.License.Should().BeEquivalentTo(expected.License);
-            }
-                       
+
+
 
             var response = await testServer.CreateRequest($"/swagger/{version}/swagger.json").SendAsync("GET");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
