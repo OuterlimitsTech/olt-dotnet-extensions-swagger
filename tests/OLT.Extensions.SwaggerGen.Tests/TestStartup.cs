@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -55,14 +54,21 @@ namespace OLT.Extensions.SwaggerGen.Tests
                     opt.DefaultApiVersion = new ApiVersion(1, 0);
                     opt.ReportApiVersions = true;
                 })
-                .AddVersionedApiExplorer(
-                    opt =>
-                    {
-                        //The format of the version added to the route URL  
-                        opt.GroupNameFormat = "'v'VVV";
-                        //Tells swagger to replace the version in the controller route  
-                        opt.SubstituteApiVersionInUrl = true;
-                    });
+                .AddApiExplorer(opt =>
+                {
+                    //The format of the version added to the route URL  
+                    opt.GroupNameFormat = "'v'VVV";
+                    //Tells swagger to replace the version in the controller route  
+                    opt.SubstituteApiVersionInUrl = true;
+                });
+                //.AddVersionedApiExplorer(
+                //    opt =>
+                //    {
+                //        //The format of the version added to the route URL  
+                //        opt.GroupNameFormat = "'v'VVV";
+                //        //Tells swagger to replace the version in the controller route  
+                //        opt.SubstituteApiVersionInUrl = true;
+                //    });
                 
          }
 

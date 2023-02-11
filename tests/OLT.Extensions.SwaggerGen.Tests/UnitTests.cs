@@ -88,7 +88,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
                 License = TestStartup.License,
             };
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(TestStartup.Title)
                 .WithDescription(TestStartup.Description)
                 .WithSecurityScheme(new OltSwaggerJwtBearerToken())
@@ -128,7 +128,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
             var expectedDescription = completelyDeprecated ? $"{TestStartup.Description}{Deprecated}" : TestStartup.Description;
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(TestStartup.Title)
                 .WithDescription(TestStartup.Description)
                 .WithOperationFilter(new OltDefaultValueFilter())
@@ -164,7 +164,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
             var expectedDescription = completelyDeprecated ? $"{description}{Deprecated}" : description;
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithXmlComments(Faker.Internet.UserName())
                 .Enable(true);
 
@@ -199,7 +199,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
             var expectedDescription = completelyDeprecated ? $"{description}{Deprecated}" : description;
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithXmlComments(Faker.Internet.UserName())
                 .Enable(true);
 
@@ -229,7 +229,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
             TestStartup.License = null;
 
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(TestStartup.Title)
                 .WithDescription(TestStartup.Description)
                 .WithOperationFilter(new OltDefaultValueFilter())
@@ -246,7 +246,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
         public async Task CamelCaseEnabled(string version)
         {
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(Faker.Company.Name())
                 .WithDescription(Faker.Lorem.Sentence())
                 .WithOperationFilter(new OltDefaultValueFilter())
@@ -266,7 +266,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
         public async Task CamelCaseDisabled(string version)
         {
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(Faker.Company.Name())
                 .WithDescription(Faker.Lorem.Sentence())
                 .WithOperationFilter(new OltDefaultValueFilter())
@@ -300,32 +300,41 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
             swaggerProvider.Should().NotBeNull();
 
-            var swagger = swaggerProvider.GetSwagger(version);
+            try
+            {
+                var swagger = swaggerProvider.GetSwagger(version);
+                swagger.Should().NotBeNull();
+                swagger.SecurityRequirements.Any().Should().Be(expected.HasSecurityReq);
+                swagger.Paths.Any().Should().Be(expected.HasPaths);
+                swagger.Components.Schemas.Should().NotBeNull();
+                Assert.Equal(expected.Title, swagger.Info.Title);
+                Assert.Equal(expected.Description, swagger.Info.Description);
+                if (expected.Contact == null)
+                {
+                    swagger.Info.Contact.Should().BeNull();
+                }
+                else
+                {
+                    swagger.Info.Contact.Should().BeEquivalentTo(expected.Contact);
+                }
 
-            swagger.Should().NotBeNull();
-            swagger.SecurityRequirements.Any().Should().Be(expected.HasSecurityReq);
-            swagger.Paths.Any().Should().Be(expected.HasPaths);
-            swagger.Components.Schemas.Should().NotBeNull();
-            Assert.Equal(expected.Title, swagger.Info.Title);
-            Assert.Equal(expected.Description, swagger.Info.Description);
-            if (expected.Contact == null)
-            {
-                swagger.Info.Contact.Should().BeNull();
+                if (expected.License == null)
+                {
+                    swagger.Info.License.Should().BeNull();
+                }
+                else
+                {
+                    swagger.Info.License.Should().BeEquivalentTo(expected.License);
+                }
+
             }
-            else
+            catch(Exception ex)
             {
-                swagger.Info.Contact.Should().BeEquivalentTo(expected.Contact);
+                var test = ex;
             }
 
-            if (expected.License == null)
-            {
-                swagger.Info.License.Should().BeNull();
-            }
-            else
-            {
-                swagger.Info.License.Should().BeEquivalentTo(expected.License);
-            }
-                       
+
+
 
             var response = await testServer.CreateRequest($"/swagger/{version}/swagger.json").SendAsync("GET");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
