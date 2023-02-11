@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using OLT.Core;
 using System;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace OLT.Extensions.SwaggerGen
 
         public static IServiceCollection AddSwaggerWithVersioning(this IServiceCollection services, OltSwaggerArgs args)
         {
+            if (args.VersionOptions != null)
+            {
+                services.AddApiVersioning(args.VersionOptions);
+            }            
+
             services.AddSingleton(args);
 
             if (!args.IsEnabled)

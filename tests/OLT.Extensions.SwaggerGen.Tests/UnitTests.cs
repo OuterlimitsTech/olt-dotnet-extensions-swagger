@@ -88,7 +88,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
                 License = TestStartup.License,
             };
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(TestStartup.Title)
                 .WithDescription(TestStartup.Description)
                 .WithSecurityScheme(new OltSwaggerJwtBearerToken())
@@ -128,7 +128,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
             var expectedDescription = completelyDeprecated ? $"{TestStartup.Description}{Deprecated}" : TestStartup.Description;
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(TestStartup.Title)
                 .WithDescription(TestStartup.Description)
                 .WithOperationFilter(new OltDefaultValueFilter())
@@ -164,7 +164,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
             var expectedDescription = completelyDeprecated ? $"{description}{Deprecated}" : description;
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithXmlComments(Faker.Internet.UserName())
                 .Enable(true);
 
@@ -199,7 +199,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
             var expectedDescription = completelyDeprecated ? $"{description}{Deprecated}" : description;
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithXmlComments(Faker.Internet.UserName())
                 .Enable(true);
 
@@ -229,7 +229,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
             TestStartup.License = null;
 
 
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(TestStartup.Title)
                 .WithDescription(TestStartup.Description)
                 .WithOperationFilter(new OltDefaultValueFilter())
@@ -246,7 +246,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
         public async Task CamelCaseEnabled(string version)
         {
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(Faker.Company.Name())
                 .WithDescription(Faker.Lorem.Sentence())
                 .WithOperationFilter(new OltDefaultValueFilter())
@@ -266,7 +266,7 @@ namespace OLT.Extensions.SwaggerGen.Tests
 
         public async Task CamelCaseDisabled(string version)
         {
-            TestStartup.Args = new OltSwaggerArgs()
+            TestStartup.Args = new OltSwaggerArgs(new Core.OltOptionsApiVersion())
                 .WithTitle(Faker.Company.Name())
                 .WithDescription(Faker.Lorem.Sentence())
                 .WithOperationFilter(new OltDefaultValueFilter())

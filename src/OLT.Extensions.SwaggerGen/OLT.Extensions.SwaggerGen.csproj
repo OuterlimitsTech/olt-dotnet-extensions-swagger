@@ -8,8 +8,8 @@
 		<ProjectGuid>03ba13fe-4fdc-4e27-b64f-dcf1be3a7fe2</ProjectGuid>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="6.4.0" />
+	<ItemGroup>		
+		<PackageReference Include="OLT.AspNetCore.Versioning" Version="6.8.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	</ItemGroup>
 
