@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<!--<TargetFrameworks>net6.0;net7.0</TargetFrameworks>-->
+		<TargetFramework>net7.0</TargetFramework>
+		<!--<TargetFrameworks>net6.0;net7.0</TargetFrameworks>-->
 		<Nullable>enable</Nullable>
 		<RootNamespace>OLT.Extensions.SwaggerGen</RootNamespace>
 		<Description>Builder for Swagger with Api Versioning</Description>
@@ -9,33 +11,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>		
-		<PackageReference Include="OLT.AspNetCore.Versioning" Version="6.8.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-	</ItemGroup>
-
-	
-	<!--<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="6.0.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-		<PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="5.0.13">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
-	</ItemGroup>
-	-->
-	
-	<ItemGroup>
+		<PackageReference Include="OLT.AspNetCore.Versioning" Version="7.0.0-beta-0005" />
 		<PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.1.1" />
 	</ItemGroup>
+	
+	<!--<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+		<PackageReference Include="OLT.AspNetCore.Versioning" Version="7.0.0-beta-0005" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="OLT.AspNetCore.Versioning" Version="6.8.0" />
+	</ItemGroup>-->
 
 	<PropertyGroup>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>

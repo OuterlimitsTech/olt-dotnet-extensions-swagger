@@ -46,10 +46,16 @@ namespace OLT.Extensions.SwaggerGen
             return services;
         }
 
+        /// <summary>
+        /// Enables Swagger UI when Enabled
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
         public static IApplicationBuilder UseSwaggerWithVersioning(this IApplicationBuilder app)
         {
             IServiceProvider services = app.ApplicationServices;
             var args = services.GetRequiredService<OltSwaggerArgs>();
+
 
             if (!args.IsEnabled)
             {

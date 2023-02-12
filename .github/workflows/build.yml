@@ -15,7 +15,7 @@ on:
 
 env:
   SOURCE_DIRECTORY: ${{ github.workspace }}
-  SOLUTION_FILE: "OLT.Extensions.Swagger.sln"
+  SOLUTION_FILE: 'OLT.Extensions.Swagger.sln'
 
 jobs:
   build:
@@ -32,10 +32,10 @@ jobs:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3.0.3
         with:
           dotnet-version: |
-            5.0.x
+            7.0.x
             6.0.x
 
       - name: Restore dependencies
@@ -49,7 +49,7 @@ jobs:
       # this process reads the .config -> dotnet-tools.json to restore packages
       - name: Sonarqube Begin
         run: |
-          dotnet tool restore          
+          dotnet tool restore
           dotnet tool run dotnet-sonarscanner begin /k:"OuterlimitsTech_olt-dotnet-extensions-swagger" /o:"outerlimitstech" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vstest.reportsPaths=TestResults/*.trx /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.branch.name=${{ steps.branch-name.outputs.current_branch }}
 
       - name: Build

@@ -39,7 +39,7 @@ public class Startup
 
        ...
        services.AddSwaggerWithVersioning(
-          new OltSwaggerArgs()
+          new OltSwaggerArgs(new OltOptionsApiVersion())
                 .WithTitle(Title)
                 .WithDescription(Description)
                 .WithSecurityScheme(new OltSwaggerJwtBearerToken())
