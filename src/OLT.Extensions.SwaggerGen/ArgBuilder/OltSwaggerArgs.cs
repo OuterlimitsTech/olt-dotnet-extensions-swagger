@@ -15,7 +15,7 @@ namespace OLT.Extensions.SwaggerGen
             VersionOptions = versionOptions;
         }
 
-        internal OltOptionsApiVersion VersionOptions { get; }
+        internal OltOptionsApiVersion VersionOptions { get; } = new OltOptionsApiVersion();
     }
 
    

@@ -14,10 +14,7 @@ namespace OLT.Extensions.SwaggerGen
 
         public static IServiceCollection AddSwaggerWithVersioning(this IServiceCollection services, OltSwaggerArgs args)
         {
-            if (args.VersionOptions != null)
-            {
-                services.AddApiVersioning(args.VersionOptions);
-            }            
+            services.AddApiVersioning(args.VersionOptions ?? new OltOptionsApiVersion());
 
             services.AddSingleton(args);
 
