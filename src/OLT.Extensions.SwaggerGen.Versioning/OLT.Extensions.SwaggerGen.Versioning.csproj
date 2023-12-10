@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!--<TargetFrameworks>net6.0;net7.0</TargetFrameworks>-->
+		<!--<TargetFramework>net7.0</TargetFramework>-->
+		<TargetFrameworks>net8.0;net7.0;net6.0</TargetFrameworks>		
+		<RootNamespace>OLT.Extensions.SwaggerGen.Versioning</RootNamespace>
+		<Description>Fluent Swagger with Api Versioning</Description>
+		<ProjectGuid>03ba13fe-4fdc-4e27-b64f-dcf1be3a7fe2</ProjectGuid>
+		<Nullable>enable</Nullable>
+		<LangVersion>Latest</LangVersion>
+		<PackageTags>Swashbuckle;Versioning;Fluent Swagger</PackageTags>
+		
+		<!--
+			This fixes an issue with generating the documentation file
+			https://developercommunity.visualstudio.com/t/vc-2019-163-build-error-when-referencing-microsoft/746169
+		-->		
+		<OpenApiGenerateDocumentsOnBuild>false</OpenApiGenerateDocumentsOnBuild>  
+	</PropertyGroup>
+	
+	<ItemGroup>		
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">		
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="7.1.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="7.0.14" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="6.4.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="6.0.25" />		
+	</ItemGroup>
+
+
+	<PropertyGroup>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+	</ItemGroup>
+	
+</Project>

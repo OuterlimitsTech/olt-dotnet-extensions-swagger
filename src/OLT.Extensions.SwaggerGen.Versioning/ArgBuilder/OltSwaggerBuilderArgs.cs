@@ -1,11 +1,8 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
 
-namespace OLT.Extensions.SwaggerGen
+namespace OLT.Extensions.SwaggerGen.Versioning
 {
     public abstract class OltSwaggerBuilderArgs<T> //: OltSwaggerBuilderArgs
           where T : OltSwaggerBuilderArgs<T>

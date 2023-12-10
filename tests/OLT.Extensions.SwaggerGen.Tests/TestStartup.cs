@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using OLT.Extensions.SwaggerGen.Versioning;
 
 namespace OLT.Extensions.SwaggerGen.Tests
 {

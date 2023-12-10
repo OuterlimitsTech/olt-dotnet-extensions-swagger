@@ -3,27 +3,28 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 
-namespace OLT.Extensions.SwaggerGen
+namespace OLT.Extensions.SwaggerGen.Versioning
 {
-    public class OltSwaggerJwtBearerToken : IOltSwaggerSecurityScheme
+    public class OltSwaggerApiKey : IOltSwaggerSecurityScheme
     {
-        public OltSwaggerJwtBearerToken(string scheme = "Bearer")
+        public OltSwaggerApiKey(string keyName = "X-API-KEY", ParameterLocation parameterLocation = ParameterLocation.Query)
         {
-            Scheme = scheme;
+            KeyName = keyName;
         }
 
-        public string Id => "BearerAuth";
-        public string Scheme { get; }
-        public string Description => "JWT Authorization header using the Bearer scheme.";
+        public string Id => "ApiKey";
+        public string KeyName { get; }
+        public string Description => $"ApiKey using {this.ParameterLocation}";
+        public ParameterLocation ParameterLocation { get; }
 
         public void Apply(SwaggerGenOptions opt)
         {
-            opt.AddSecurityDefinition(this.Id, new OpenApiSecurityScheme
+            opt.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme()
             {
-                Type = SecuritySchemeType.Http,
-                Scheme = this.Scheme,
-                BearerFormat = "JWT",
-                Description = this.Description
+                Type = SecuritySchemeType.ApiKey,
+                In = this.ParameterLocation,
+                Name = KeyName,
+                Description = this.Description,
             });
 
             opt.AddSecurityRequirement(
@@ -41,6 +42,7 @@ namespace OLT.Extensions.SwaggerGen
                         Array.Empty<string>()
                     }
                 });
+
         }
     }
 }

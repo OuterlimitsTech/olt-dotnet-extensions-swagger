@@ -1,9 +1,4 @@
-﻿using Microsoft.OpenApi.Models;
-using OLT.Core;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Collections.Generic;
-
-namespace OLT.Extensions.SwaggerGen
+﻿namespace OLT.Extensions.SwaggerGen.Versioning
 {
     /// <summary>
     /// Swagger Argument Builder
@@ -15,7 +10,7 @@ namespace OLT.Extensions.SwaggerGen
             VersionOptions = versionOptions;
         }
 
-        internal OltOptionsApiVersion VersionOptions { get; }
+        internal OltOptionsApiVersion VersionOptions { get; } = new OltOptionsApiVersion();
     }
 
    
