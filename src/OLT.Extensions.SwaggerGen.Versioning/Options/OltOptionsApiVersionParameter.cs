@@ -1,8 +1,7 @@
 ﻿using Asp.Versioning;
-using OLT.Constants;
 using System.Collections.Generic;
 
-namespace OLT.Core
+namespace OLT.Extensions.SwaggerGen.Versioning
 {
     public class OltOptionsApiVersionParameter
     {

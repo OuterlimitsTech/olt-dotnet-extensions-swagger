@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning;
 
-namespace OLT.Core
+namespace OLT.Extensions.SwaggerGen.Versioning
 {
     public class OltOptionsApiVersion 
     {

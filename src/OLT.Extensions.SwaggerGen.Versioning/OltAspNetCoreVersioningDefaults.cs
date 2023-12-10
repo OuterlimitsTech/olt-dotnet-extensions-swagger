@@ -1,4 +1,4 @@
-﻿namespace OLT.Constants
+﻿namespace OLT.Extensions.SwaggerGen.Versioning
 {
     public static class OltAspNetCoreVersioningDefaults
     {       

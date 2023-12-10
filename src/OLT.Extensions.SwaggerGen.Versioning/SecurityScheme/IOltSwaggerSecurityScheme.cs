@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
+﻿using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace OLT.Extensions.SwaggerGen
+
+namespace OLT.Extensions.SwaggerGen.Versioning
 {
     /// <summary>
     /// Security Scheme to define to Swagger Definition

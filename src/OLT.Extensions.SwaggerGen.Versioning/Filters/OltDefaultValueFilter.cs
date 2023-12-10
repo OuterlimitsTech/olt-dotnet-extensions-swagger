@@ -5,7 +5,7 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace OLT.Extensions.SwaggerGen
+namespace OLT.Extensions.SwaggerGen.Versioning
 {
 
     /// <summary>

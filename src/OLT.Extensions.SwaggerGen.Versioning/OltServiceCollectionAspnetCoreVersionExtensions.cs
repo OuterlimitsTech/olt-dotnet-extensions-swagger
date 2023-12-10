@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace OLT.Core
+namespace OLT.Extensions.SwaggerGen.Versioning
 {
     public static class OltServiceCollectionAspnetCoreVersionExtensions
     {

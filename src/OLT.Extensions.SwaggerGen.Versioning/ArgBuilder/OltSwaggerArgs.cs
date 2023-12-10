@@ -1,9 +1,4 @@
-﻿using Microsoft.OpenApi.Models;
-using OLT.Core;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Collections.Generic;
-
-namespace OLT.Extensions.SwaggerGen
+﻿namespace OLT.Extensions.SwaggerGen.Versioning
 {
     /// <summary>
     /// Swagger Argument Builder

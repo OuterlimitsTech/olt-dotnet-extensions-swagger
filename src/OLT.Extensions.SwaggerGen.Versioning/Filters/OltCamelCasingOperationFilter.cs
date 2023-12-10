@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Collections.Generic;
 
-namespace OLT.Extensions.SwaggerGen
+namespace OLT.Extensions.SwaggerGen.Versioning
 {
     /// <summary>
     /// Represents the Swagger/Swashbuckle operation filter used to camel case api route parameter. <see href="https://github.com/OuterlimitsTech/olt-dotnet-extensions-swagger/issues/11"/>

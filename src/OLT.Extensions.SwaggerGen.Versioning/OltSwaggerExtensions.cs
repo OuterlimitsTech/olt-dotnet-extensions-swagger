@@ -1,12 +1,11 @@
 ﻿using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using OLT.Core;
 using System;
 using System.IO;
 using System.Linq;
 
-namespace OLT.Extensions.SwaggerGen
+namespace OLT.Extensions.SwaggerGen.Versioning
 {
     public static class OltSwaggerExtensions
     {
