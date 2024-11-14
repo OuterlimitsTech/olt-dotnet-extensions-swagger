@@ -47,7 +47,7 @@ jobs:
       - name: Sonarqube Begin
         run: |
           dotnet tool restore
-          dotnet tool run dotnet-sonarscanner begin /k:"OuterlimitsTech_olt-dotnet-extensions-swagger" /o:"outerlimitstech" /d:sonar.login=${{ secrets.SONAR_TOKEN }} /d:sonar.host.url="https://sonarcloud.io" /d:sonar.scanner.scanAll=false /d:sonar.cs.vstest.reportsPaths=TestResults/*.trx /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.branch.name=${{ steps.branch-name.outputs.current_branch }}
+          dotnet tool run dotnet-sonarscanner begin /k:"OuterlimitsTech_olt-dotnet-extensions-swagger" /o:"outerlimitstech" /d:sonar.token=${{ secrets.SONAR_TOKEN }} /d:sonar.host.url="https://sonarcloud.io" /d:sonar.scanner.scanAll=false /d:sonar.cs.vstest.reportsPaths=TestResults/*.trx /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.branch.name=${{ steps.branch-name.outputs.current_branch }}
 
       - name: Build
         run: dotnet build ${{ format('{0}/{1}', env.SOURCE_DIRECTORY, env.SOLUTION_FILE) }} --configuration "Release" --no-restore
