@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
+using OLT.Extensions.SwaggerGen.Versioning.Tests.Controllers.Models;
 
-
-namespace OLT.Extensions.SwaggerGen.Tests.Controllers.V2
+namespace OLT.Extensions.SwaggerGen.Versioning.Tests.Controllers
 {
     [ApiVersion("2.0")]
     [ApiVersion("3.0")]

@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OLT.AspNetCore.Versioning.Tests.Assets
+namespace OLT.Extensions.SwaggerGen.Versioning.Tests.Controllers
 {
     [ApiController]
     [Produces("application/json")]
@@ -9,8 +9,9 @@ namespace OLT.AspNetCore.Versioning.Tests.Assets
     public class TestVersionController : ControllerBase
     {
 
-        [ApiVersion("1.0")]
+        [ApiVersion("1.0", Deprecated = true)]
         [ApiVersion("2.0")]
+        //[ApiVersion("3.0")]
         [HttpGet, Route("one")]
         public ActionResult ApiVersionOne()
         {
@@ -18,6 +19,7 @@ namespace OLT.AspNetCore.Versioning.Tests.Assets
         }
 
         [ApiVersion("2.0")]
+        //[ApiVersion("3.0")]
         [HttpGet, Route("two")]
         public ActionResult ApiVersionTwo()
         {

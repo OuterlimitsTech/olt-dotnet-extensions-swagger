@@ -33,9 +33,9 @@ namespace OLT.Extensions.SwaggerGen.Versioning
         /// </remarks>
         /// <param name="value"><see cref="string"/></param>
         /// <returns><typeparamref name="T"/></returns>
-        public T WithDescription(string value)
+        public T WithDescription(string? value)
         {
-            this.Description = value;
+            this.Description = value ?? this.Description;
             return (T)this;
         }
 
@@ -126,9 +126,9 @@ namespace OLT.Extensions.SwaggerGen.Versioning
         /// </remarks>
         /// <param name="value"><see cref="string"/></param>
         /// <returns><typeparamref name="T"/></returns>
-        public T WithTitle(string value)
+        public T WithTitle(string? value)
         {
-            this.Title = value;
+            this.Title = value ?? this.Title;
             return (T)this;
         }
 
