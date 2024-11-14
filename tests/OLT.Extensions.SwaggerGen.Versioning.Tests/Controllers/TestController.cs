@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
+using OLT.Extensions.SwaggerGen.Versioning.Tests.Controllers.Models;
 
-
-namespace OLT.Extensions.SwaggerGen.Tests.Controllers.V2
+namespace OLT.Extensions.SwaggerGen.Versioning.Tests.Controllers
 {
     [ApiVersion("2.0")]
     [ApiVersion("3.0")]
@@ -18,7 +18,7 @@ namespace OLT.Extensions.SwaggerGen.Tests.Controllers.V2
         /// <returns></returns>
         [HttpPost, Route("")]
         public ActionResult<string> Log(string value)
-        {            
+        {
             return Ok($"Received {value}");
         }
 
@@ -50,7 +50,7 @@ namespace OLT.Extensions.SwaggerGen.Tests.Controllers.V2
         /// <param name="value1"></param>   
         /// <param name="model"></param>   
         [HttpGet, Route("fake/{value1:int}/test")]
-        public ActionResult<string> PostTest(int value1, [FromBody]TestModel model)
+        public ActionResult<string> PostTest(int value1, [FromBody] TestModel model)
         {
             return Ok($"Pong {value1} {model.Id} {model.Value}");
         }

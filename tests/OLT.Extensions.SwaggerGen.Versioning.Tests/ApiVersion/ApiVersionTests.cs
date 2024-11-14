@@ -1,13 +1,12 @@
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Asp.Versioning;
-using Microsoft.Extensions.DependencyInjection;
-using System.Net;
-using OLT.AspNetCore.Versioning.Tests.Assets;
-using OLT.Extensions.SwaggerGen.Versioning;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
+using OLT.Extensions.SwaggerGen.Versioning.Tests.Assets;
+using System.Net;
 
-namespace OLT.AspNetCore.Versioning.Tests
+namespace OLT.Extensions.SwaggerGen.Versioning.Tests.ApiVersion
 {
     public class ApiVersionTests
     {
@@ -27,7 +26,7 @@ namespace OLT.AspNetCore.Versioning.Tests
         [InlineData("/api/api-version/two?api-version=3.0", HttpStatusCode.BadRequest)]
         public async Task ControllerTests(string uri, HttpStatusCode expected)
         {
-            using (var testServer = new TestServer(TestHelper.WebHostBuilder<Startup>()))
+            using (var testServer = new TestServer(TestHostBuilder.WebHostBuilder<HostStartup>()))
             {
                 using (var client = testServer.CreateClient())
                 {
@@ -36,7 +35,7 @@ namespace OLT.AspNetCore.Versioning.Tests
 
                     var provider = testServer.Services.GetService<IApiDescriptionGroupCollectionProvider>();
                     Assert.NotNull(provider);
-                    provider.ApiDescriptionGroups.Items.Should().HaveCount(2);
+                    provider.ApiDescriptionGroups.Items.Should().HaveCount(3);
                 }
             }
         }
@@ -102,7 +101,7 @@ namespace OLT.AspNetCore.Versioning.Tests
             Assert.Equal(OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.MediaType, model.Parameter.MediaType);
             Assert.Equal(OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.Header, model.Parameter.Header); ;
             Assert.True(model.AssumeDefaultVersion);
-            model.DefaultVersion.Should().BeEquivalentTo(ApiVersion.Default);
+            model.DefaultVersion.Should().BeEquivalentTo(Asp.Versioning.ApiVersion.Default);
 
             model.AssumeDefaultVersion = false;
 
@@ -125,7 +124,7 @@ namespace OLT.AspNetCore.Versioning.Tests
             var services = new ServiceCollection();
             OltOptionsApiVersion nullOptions = null;
             Assert.Throws<ArgumentNullException>("services", () => OltServiceCollectionAspnetCoreVersionExtensions.AddApiVersioning(null, nullOptions));
-            Assert.Throws<ArgumentNullException>("options", () => OltServiceCollectionAspnetCoreVersionExtensions.AddApiVersioning(services, nullOptions));
+            Assert.Throws<ArgumentNullException>("options", () => services.AddApiVersioning(nullOptions));
             Assert.Throws<ArgumentNullException>("services", () => OltServiceCollectionAspnetCoreVersionExtensions.AddApiVersioning(null, new OltOptionsApiVersion()));
         }
     }

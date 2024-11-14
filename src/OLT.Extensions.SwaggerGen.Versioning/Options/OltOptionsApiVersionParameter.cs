@@ -11,7 +11,7 @@ namespace OLT.Extensions.SwaggerGen.Versioning
         /// <remarks>
         /// Default <see cref="OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.Query"/>
         /// </remarks>
-        public virtual string Query { get; set; } = OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.Query;
+        public virtual string? Query { get; set; } = OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.Query;
 
         /// <summary>
         /// Reads the API Version from media type <see cref="MediaTypeApiVersionReader"/>
@@ -19,7 +19,7 @@ namespace OLT.Extensions.SwaggerGen.Versioning
         /// <remarks>
         /// Default <see cref="OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.MediaType"/>
         /// </remarks>
-        public virtual string MediaType { get; set; } = OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.MediaType;
+        public virtual string? MediaType { get; set; } = OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.MediaType;
 
         /// <summary>
         /// Reads the API Version from media type <see cref="MediaTypeApiVersionReader"/>
@@ -27,7 +27,7 @@ namespace OLT.Extensions.SwaggerGen.Versioning
         /// <remarks>
         /// Default <see cref="OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.Header"/>
         /// </remarks>
-        public virtual string Header { get; set; } = OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.Header;
+        public virtual string? Header { get; set; } = OltAspNetCoreVersioningDefaults.ApiVersion.ParameterName.Header;
 
 
 
