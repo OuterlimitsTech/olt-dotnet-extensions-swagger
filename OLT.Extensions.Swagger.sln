@@ -11,7 +11,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E20F2D2C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OLT.Extensions.SwaggerGen.Versioning", "src\OLT.Extensions.SwaggerGen.Versioning\OLT.Extensions.SwaggerGen.Versioning.csproj", "{03BA13FE-4FDC-4E27-B64F-DCF1BE3A7FE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OLT.AspNetCore.Versioning", "tests\OLT.AspNetCore.Versioning\OLT.AspNetCore.Versioning.csproj", "{A50C8A16-9229-42EC-B4E2-2B3E044C4ADE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OLT.AspNetCore.Versioning", "tests\OLT.AspNetCore.Versioning\OLT.AspNetCore.Versioning.csproj", "{A50C8A16-9229-42EC-B4E2-2B3E044C4ADE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{E7350367-380A-4D25-9BFE-DCA0DD03B027}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
