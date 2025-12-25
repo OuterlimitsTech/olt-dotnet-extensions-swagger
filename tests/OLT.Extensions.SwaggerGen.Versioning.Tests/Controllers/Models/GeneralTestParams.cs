@@ -4,7 +4,7 @@ namespace OLT.Extensions.SwaggerGen.Versioning.Tests.Controllers.Models
 {
     public class GeneralTestParams
     {
-        private readonly string Deprecated = $" - {OltSwaggerExtensions.Deprecated}";
+        private readonly string Deprecated = $" - {OLT.Extensions.SwaggerGen.Versioning.OltSwaggerExtensions.Deprecated}";
 
         public GeneralTestParams(string? title, string? description, bool hasSecurityReq, bool hasPaths)
         {
