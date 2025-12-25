@@ -28,7 +28,7 @@ namespace OLT.Extensions.SwaggerGen.Versioning
             }
         }
 
-        public void Configure(string name, SwaggerGenOptions options)
+        public void Configure(string? name, SwaggerGenOptions options)
         {
             Configure(options);
         }
