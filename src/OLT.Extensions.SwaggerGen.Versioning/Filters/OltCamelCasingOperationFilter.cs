@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace OLT.Extensions.SwaggerGen.Versioning
@@ -17,10 +17,11 @@ namespace OLT.Extensions.SwaggerGen.Versioning
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             if (operation.Parameters != null)
-            {
+            {                
                 foreach (var item in operation.Parameters)
                 {
-                    item.Name = ToCamelCase(item.Name);
+                    item.Name?.Replace(item.Name, ToCamelCase(item.Name));
+                //    item.Name = ToCamelCase(item.Name);
                 }
             }
         }

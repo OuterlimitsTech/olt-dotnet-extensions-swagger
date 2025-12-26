@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 
@@ -26,21 +27,23 @@ namespace OLT.Extensions.SwaggerGen.Versioning
                 Description = this.Description
             });
 
-            opt.AddSecurityRequirement(
-                new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = this.Id
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
-                });
+            opt.AddSecurityRequirement(document => new() { [new OpenApiSecuritySchemeReference(this.Scheme, document)] = [] });
+
+            //opt.AddSecurityRequirement(
+            //    new OpenApiSecurityRequirement
+            //    {
+            //        {
+            //            new OpenApiSecurityScheme
+            //            {                            
+            //                Reference = new OpenApiReference
+            //                {
+            //                    Type = ReferenceType.SecurityScheme,
+            //                    Id = this.Id
+            //                }
+            //            },
+            //            Array.Empty<string>()
+            //        }
+            //    });
         }
     }
 }

@@ -23,7 +23,8 @@ public abstract class BaseSwaggerUnitTests
         {
             var swagger = swaggerProvider.GetSwagger(version);
             swagger.Should().NotBeNull();
-            swagger.SecurityRequirements.Any().Should().Be(testParams.HasSecurityReq);
+            swagger.Security.Any().Should().Be(testParams.HasSecurityReq);
+            //swagger.SecurityRequirements.Any().Should().Be(testParams.HasSecurityReq);
             swagger.Paths.Any().Should().Be(testParams.HasPaths);
             swagger.Components.Schemas.Should().NotBeNull();
             Assert.Equal(testParams.Title, swagger.Info.Title);

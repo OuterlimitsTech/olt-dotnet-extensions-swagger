@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace OLT.Extensions.SwaggerGen.Versioning
@@ -33,37 +32,37 @@ namespace OLT.Extensions.SwaggerGen.Versioning
 
             if (operation.Parameters != null)
             {
-                foreach (var parameter in operation.Parameters)
-                {
-                    var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
+                //foreach (var parameter in operation.Parameters)
+                //{
+                //    var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
 
-                    var routeInfo = description.RouteInfo;
-                    if (string.IsNullOrEmpty(parameter.Name))
-                    {
-                        parameter.Name = description.ModelMetadata?.Name;
-                    }
+                //    var routeInfo = description.RouteInfo;
+                //    if (string.IsNullOrEmpty(parameter.Name))
+                //    {
+                //        parameter.Name = description.ModelMetadata?.Name;
+                //    }
 
-                    parameter.Description ??= description.ModelMetadata?.Description;
+                //    parameter.Description ??= description.ModelMetadata?.Description;
 
-                    if (parameter.Name != null && parameter.Name.Equals("api-version") && parameter.In == ParameterLocation.Query)
-                    {
-                        parameter.AllowEmptyValue = false;
-                        if (description.DefaultValue != null)
-                        {
-                            parameter.Example = new OpenApiString(description.DefaultValue.ToString());
-                        }
-                    }
+                //    if (parameter.Name != null && parameter.Name.Equals("api-version") && parameter.In == ParameterLocation.Query)
+                //    {
+                //        parameter.AllowEmptyValue = false;
+                //        if (description.DefaultValue != null)
+                //        {
+                //            parameter.Example = new OpenApiString(description.DefaultValue.ToString());
+                //        }
+                //    }
 
-                    parameter.Required = parameter.Required || description.IsRequired;
+                //    parameter.Required = parameter.Required || description.IsRequired;
 
-                    if (routeInfo == null)
-                    {
-                        continue;
-                    }
+                //    if (routeInfo == null)
+                //    {
+                //        continue;
+                //    }
 
-                    parameter.Required |= !routeInfo.IsOptional;
+                //    parameter.Required |= !routeInfo.IsOptional;
 
-                }
+                //}
             }
 
         }

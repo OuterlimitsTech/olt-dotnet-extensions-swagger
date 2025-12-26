@@ -1,4 +1,4 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi;
 
 namespace OLT.Extensions.SwaggerGen.Versioning.Tests.Controllers.Models
 {
